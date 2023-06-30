@@ -1,60 +1,117 @@
 import React, { useState } from 'react';
-import { Text, View, Pressable, StyleSheet } from 'react-native';
-import getWorkouts from '../data/workouts';
-import addWorkout from './workoutListFunctions';
+import { Text, View, Pressable, StyleSheet, Modal, TextInput, Button } from 'react-native';
+import workouts from '../data/workouts';
 
 export default function WorkoutList({ selectedDate }) {
 
-    //find the workout for the selected date
-
-    //return the date * 2 in text
     selectedDate = selectedDate.toDateString().substring(4)
 
-    //print out workout for the date
-    const workoutsForDate = getWorkouts.filter(
+    const [workoutsForDate, setWorkoutsForDate] = useState(workouts.filter(
         (workout) => workout.date === selectedDate
-    );
+    ));
+    const [showModal, setShowModal] = useState(false);
+    const [workoutName, setWorkoutName] = useState("");
+    const [bestSet, setBestSet] = useState("");
+
+    const addWorkout = () => {
+        const newWorkout = {
+            name: workoutName,
+            bestSet: bestSet,
+            date: selectedDate,
+            sets: [],
+        };
+        workouts.push(newWorkout);
+        setWorkoutsForDate([...workoutsForDate, newWorkout]);
+        setWorkoutName("");
+        setBestSet("");
+        setShowModal(false);
+    }
+
+    const deleteWorkout = (index) => {
+        setWorkoutsForDate(workoutsForDate.filter((_, i) => i !== index));
+    }
+
     return (
         <View>
             {workoutsForDate.length > 0 ? (
                 workoutsForDate.map((workout, index) => (
-                    <Pressable
-                        key={index}
-                        onPress={() => setSelectedWorkout(workout)}
-                        style={styles.workout}
-                    >
-                        <Text style={styles.workoutName}>{workout.name}</Text>
-                        <Text style={styles.bestSet}>Best Set: {workout.bestSet}</Text>
-                    </Pressable>
+                    <View style={styles.workout} key={index}>
+                        <View style={styles.leftContainer}>
+                            <Text style={styles.workoutName}>{workout.name}</Text>
+                            <Text style={styles.bestSet}>Best Set: {workout.bestSet}</Text>
+                        </View>
+                        <Pressable style={styles.deleteButton} onPress={() => deleteWorkout(index)}>
+                            <Text style={styles.deleteButtonText}>Delete</Text>
+                        </Pressable>
+                    </View>
+
                 ))
             ) : (
                 <Text style={styles.noWorkout}>No workouts for this date</Text>
             )}
-            <Pressable style={{
-                backgroundColor: '#37FD12',
-                padding: 20,
-                marginVertical: 2,
-                borderRadius: 12
-            }}
-                onPress={() => addWorkout()}
-            >   
-                <Text style={styles.addWorkout}>Add Workout</Text>
+            <Pressable style={styles.addButton} onPress={() => setShowModal(true)}>
+                <Text style={styles.addButtonText}>Add Workout</Text>
             </Pressable>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={showModal}
+                onRequestClose={() => setShowModal(false)}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Add a new workout</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={setWorkoutName}
+                            value={workoutName}
+                            placeholder="Workout Name"
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={setBestSet}
+                            value={bestSet}
+                            placeholder="Best Set"
+                        />
+                        <Button
+                            onPress={addWorkout}
+                            title="Add Workout"
+                            color="#841584"
+                        />
+                    </View>
+                </View>
+            </Modal>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     workout: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         backgroundColor: '#333333',
         padding: 20,
         marginVertical: 2,
         borderRadius: 12
     },
-    addWorkout: {
+    addButton: {
         backgroundColor: '#37FD12',
+        padding: 20,
+        marginVertical: 2,
+        borderRadius: 12
+    },
+    addButtonText: {
         color: 'black',
-        borderRadius: 23,
+        textAlign: 'center'
+    },
+    deleteButton: {
+        backgroundColor: '#FD3737',
+        padding: 5,
+        borderRadius: 10
+    },
+    deleteButtonText: {
+        color: 'white',
     },
     workoutName: {
         fontWeight: 'bold',
@@ -69,7 +126,35 @@ const styles = StyleSheet.create({
     },
     bestSet: {
         color: 'white',
-
         marginTop: 10,
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    },
+    input: {
+        height: 40,
+        margin: 12,
     },
 });

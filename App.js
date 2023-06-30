@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Pressable } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Pressable, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import WorkoutList from './components/WorkoutList';
@@ -14,9 +14,20 @@ export default function App() {
     newDate.setDate(date.getDate() + numDays); // Update the date by adding/subtracting the number of days
     setDate(newDate); // Update the state variable
   };
+  
 
   return (
-    <SafeAreaView style={styles.container}>
+    
+    <SafeAreaView style={styles.container} 
+    onTouchStart={e=> this.touchX = e.nativeEvent.pageX}
+    onTouchEnd={e => {
+      if (touchX - e.nativeEvent.pageX < -20) {
+        changeDate(-1);
+      } else if (touchX - e.nativeEvent.pageX > 20) {
+        changeDate(1);
+      }
+    }}>
+      <ScrollView>
       <View style={styles.datePicker}>
         <AntDesign
           onPress={() => changeDate(-1)}
@@ -38,7 +49,7 @@ export default function App() {
         <Text styles = {{color: 'white'}}>Press me</Text>
       </Pressable>
       <StatusBar style="auto" />
-      
+      </ScrollView>
     </SafeAreaView>
   );
 }
