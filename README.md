@@ -28,7 +28,7 @@ The Full Stack Workout Tracker allows users to track their workout routines. You
 
 2. Install all dependencies:
     ```
-    cd repo-name
+    cd workout
     npm install
     ```
 
