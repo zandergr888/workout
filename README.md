@@ -17,11 +17,13 @@ Other key technologies include React Native for the mobile front-end, Mongoose f
 
 The Full Stack Workout Tracker allows users to track their workout routines. You can add workouts with custom sets, reps, and weights, and the application will store and display all your workouts for each date.
 
+### Sample Photos/Videos
+
 ## Getting Started
 
 1. Clone this repository:
     ```
-    git clone https://github.com/username/repo-name.git
+    git clone https://github.com/zandergr888/workout.git
     ```
 
 2. Install all dependencies:
@@ -44,7 +46,7 @@ The Full Stack Workout Tracker allows users to track their workout routines. You
 5. Run the front-end React Native app:
     Navigate to the front-end directory and start the app:
     ```
-    cd front-end
+    cd client
     npm start
     ```
 
@@ -54,12 +56,8 @@ The Full Stack Workout Tracker allows users to track their workout routines. You
 
 Contributions, issues, and feature requests are welcome!
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
 ## Contact
 
-Your Name - YourEmail@example.com
+Your Name - alex.hoang@utexas.edu
 
-Project Link: https://github.com/yourusername/your-repo-name
+Project Link: https://github.com/zandergr888/workout.git
