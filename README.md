@@ -19,6 +19,8 @@ The Full Stack Workout Tracker allows users to track their workout routines. You
 
 ### Sample Photos/Videos
 
+![](https://github.com/zandergr888/workout/blob/main/sample.png)
+
 ## Getting Started
 
 1. Clone this repository:
