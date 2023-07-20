@@ -19,7 +19,7 @@ The Full Stack Workout Tracker allows users to track their workout routines. You
 
 ### Sample Photos/Videos
 
-![](https://github.com/zandergr888/workout/blob/main/sample.png)
+![](https://github.com/zandergr888/workout/blob/main/demo.png)
 
 This is a sample picture of the UI. You can navigate between days and click on each workout that you added. Each workout is then added to the backend server. Each workout is then displayed since the front end and back end interact with each other. 
 
