@@ -85,17 +85,22 @@ export default function WorkoutList({ selectedDate }) {
         <View>
             {workoutsForDate.length > 0 ? (
                 workoutsForDate.map((workout, index) => (
-                    <View key={index} style={styles.workout}>
-                        <Pressable
-                            onPress={() => setSelectedWorkout(workout)}
-                        >
+                    <View
+                        key={index}
+                        style={styles.workout}
+                        onStartShouldSetResponder={() => {
+                            setSelectedWorkout(workout);
+                            return true;
+                        }}
+                    >
+                        <View style={styles.workoutItem}>
                             <Text style={styles.workoutName}>{workout.name}</Text>
-                        </Pressable>
-                        <Button
-                            title="Delete"
-                            onPress={() => deleteWorkout(workout._id)}
-                            color="red"
-                        />
+                            <Pressable style={styles.deleteButton}
+                                onPress={() => deleteWorkout(workout._id)}
+                            >
+                                <Text style={styles.deleteButtonText}>X</Text>
+                            </Pressable>
+                        </View>
                     </View>
                 ))
             ) : (
@@ -249,5 +254,22 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom: 10,
         width: '60%',
+    },
+    workoutItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    deleteButton: {
+        backgroundColor: 'red',
+        width: 25,
+        height: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 12
+    },
+    deleteButtonText: {
+        color: 'white',
+        fontWeight: 'bold'
     },
 });
