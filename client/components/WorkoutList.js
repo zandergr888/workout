@@ -3,8 +3,6 @@ import { Text, View, Pressable, StyleSheet, Modal, Button, Dimensions, Touchable
 import initialWorkouts from '../data/workouts';
 import axios from 'axios';
 
-
-
 export default function WorkoutList({ selectedDate }) {
 
     selectedDate = selectedDate.toDateString().substring(4)
@@ -37,6 +35,20 @@ export default function WorkoutList({ selectedDate }) {
         ]);
         setNewSetReps('');
         setNewSetWeight('');
+    };
+
+
+    const deleteWorkout = (id) => {
+        axios.delete(`http://localhost:8080/api/workouts/${id}`)
+            .then(res => {
+                // workout was deleted successfully
+                console.log(res.data);
+                setWorkouts(workouts.filter(workout => workout._id !== id));
+            })
+            .catch(err => {
+                // something went wrong
+                console.error(err);
+            });
     };
 
     const addWorkout = () => {
@@ -73,13 +85,18 @@ export default function WorkoutList({ selectedDate }) {
         <View>
             {workoutsForDate.length > 0 ? (
                 workoutsForDate.map((workout, index) => (
-                    <Pressable
-                        key={index}
-                        style={styles.workout}
-                        onPress={() => setSelectedWorkout(workout)}
-                    >
-                        <Text style={styles.workoutName}>{workout.name}</Text>
-                    </Pressable>
+                    <View key={index} style={styles.workout}>
+                        <Pressable
+                            onPress={() => setSelectedWorkout(workout)}
+                        >
+                            <Text style={styles.workoutName}>{workout.name}</Text>
+                        </Pressable>
+                        <Button
+                            title="Delete"
+                            onPress={() => deleteWorkout(workout._id)}
+                            color="red"
+                        />
+                    </View>
                 ))
             ) : (
                 <Text style={styles.noWorkout}>No workouts for this date</Text>
@@ -103,12 +120,11 @@ export default function WorkoutList({ selectedDate }) {
                     <TouchableWithoutFeedback onPress={() => setSelectedWorkout(null)}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <Text style={styles.modalText}>{selectedWorkout.name}</Text>
+                                <Text style={styles.exerciseName}>{selectedWorkout.name}</Text>
                                 {selectedWorkout.sets.map((set, index) => (
-                                    <View key={index}>
+                                    <View key={index} style={styles.setRow}>
                                         <Text>Set {index + 1}</Text>
-                                        <Text>Reps: {set.reps}</Text>
-                                        <Text>Weight: {set.weight}</Text>
+                                        <Text>{set.weight} x {set.reps}</Text>
                                     </View>
                                 ))}
                             </View>
@@ -127,32 +143,34 @@ export default function WorkoutList({ selectedDate }) {
                         setAddWorkoutVisible(false);
                     }}
                 >
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Text style={styles.modalText}>New Workout</Text>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={setNewWorkoutName}
-                                value={newWorkoutName}
-                                placeholder="Workout Name"
-                            />
-                            {/* Remove sets, weight, reps TextInput */}
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={setNewSetReps}
-                                value={newSetReps}
-                                placeholder="Set Reps"
-                            />
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={setNewSetWeight}
-                                value={newSetWeight}
-                                placeholder="Set Weight"
-                            />
-                            <Button title="Add set" onPress={addSetToWorkout} />
-                            <Button title="Add To Workout" onPress={addWorkout} />
+                    <TouchableWithoutFeedback onPress={() => setAddWorkoutVisible(false)}>
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>New Workout</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={setNewWorkoutName}
+                                    value={newWorkoutName}
+                                    placeholder="Workout Name"
+                                />
+                                {/* Remove sets, weight, reps TextInput */}
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={setNewSetReps}
+                                    value={newSetReps}
+                                    placeholder="Set Reps"
+                                />
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={setNewSetWeight}
+                                    value={newSetWeight}
+                                    placeholder="Set Weight"
+                                />
+                                <Button title="Add set" onPress={addSetToWorkout} />
+                                <Button title="Add To Workout" onPress={addWorkout} />
+                            </View>
                         </View>
-                    </View>
+                    </TouchableWithoutFeedback>
                 </Modal>
             )}
         </View>
@@ -200,7 +218,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 20,
-        backgroundColor: "white",
+        backgroundColor: "#A9A9A9", // Changed from "white" to "A9A9A9" for a gray color
         borderRadius: 20,
         padding: 35,
         alignItems: "center",
@@ -220,5 +238,16 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         margin: 12,
+    },
+    exerciseName: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginBottom: 20,
+    },
+    setRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 10,
+        width: '60%',
     },
 });

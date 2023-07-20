@@ -15,6 +15,23 @@ app.get('/', (req, res) => {
     res.send("hello from dalle");
 });
 
+app.delete('/api/workouts/:id', async (req, res) => {
+    try {
+      const workout = await Workout.findById(req.params.id);
+  
+      if (!workout) {
+        res.status(404).json({ message: "Workout not found" });
+      } else {
+        await workout.remove();
+        res.json({ message: "Workout removed" });
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server Error" });
+    }
+  });
+  
+
 const startServer = async () => {
     console.log("hi" + process.env.MONGO_URL);
     try {
