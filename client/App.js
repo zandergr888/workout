@@ -14,16 +14,13 @@ export default function App() {
     newDate.setDate(date.getDate() + numDays); // Update the date by adding/subtracting the number of days
     setDate(newDate); // Update the state variable
   };
-  
-
   return (
-    
     <SafeAreaView style={styles.container} 
     onTouchStart={e=> this.touchX = e.nativeEvent.pageX}
     onTouchEnd={e => {
-      if (touchX - e.nativeEvent.pageX < -20) {
+      if (touchX - e.nativeEvent.pageX < -40) {
         changeDate(-1);
-      } else if (touchX - e.nativeEvent.pageX > 20) {
+      } else if (touchX - e.nativeEvent.pageX > 40) {
         changeDate(1);
       }
     }}>

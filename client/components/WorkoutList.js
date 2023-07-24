@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, StyleSheet, Modal, Button, Dimensions, TouchableWithoutFeedback, TextInput } from 'react-native';
 import initialWorkouts from '../data/workouts';
+import { EvilIcons } from '@expo/vector-icons'; 
+
 import axios from 'axios';
 
 export default function WorkoutList({ selectedDate }) {
@@ -98,7 +100,7 @@ export default function WorkoutList({ selectedDate }) {
                             <Pressable style={styles.deleteButton}
                                 onPress={() => deleteWorkout(workout._id)}
                             >
-                                <Text style={styles.deleteButtonText}>X</Text>
+                                <EvilIcons name="trash" size={24} color="red" />
                             </Pressable>
                         </View>
                     </View>
@@ -261,7 +263,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     deleteButton: {
-        backgroundColor: 'red',
         width: 25,
         height: 25,
         justifyContent: 'center',
