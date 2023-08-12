@@ -80,9 +80,6 @@ export default function WorkoutList({ selectedDate }) {
     const workoutsForDate = workouts.filter(
         (workout) => workout.date === selectedDate
     );
-
-
-
     return (
         <View>
             {workoutsForDate.length > 0 ? (
