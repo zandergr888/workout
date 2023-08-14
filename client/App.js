@@ -8,9 +8,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
 import parseErrorStack from 'react-native/Libraries/Core/Devtools/parseErrorStack';
 
-
-
-
 const Stack = createStackNavigator();
 
 function MainScreen({ navigation }) {
@@ -49,9 +46,6 @@ function MainScreen({ navigation }) {
           />
         </View>
         <WorkoutList selectedDate={date} />
-        <Pressable styles={{ color: '#DDDDDD' }}>
-          <Text styles={{ color: 'white' }}>Press me</Text>
-        </Pressable>
         <StatusBar style="auto" />
       </ScrollView>
     </SafeAreaView>
@@ -68,9 +62,8 @@ function RegisterScreen({ navigation }) {
       alert('Passwords do not match.');
       return;
     }
-
     try {
-      const response = await axios.post('http://localhost:8080/api/register', {
+      const response = await axios.post('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/register', {
         username,
         password
       });
@@ -91,15 +84,17 @@ function RegisterScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container2}>
       <TextInput
         placeholder="Username"
+        placeholderTextColor="#f0f0f0"
         value={username}
         onChangeText={setUsername}
         style={styles.input}
       />
       <TextInput
         placeholder="Password"
+        placeholderTextColor="#f0f0f0"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -107,6 +102,7 @@ function RegisterScreen({ navigation }) {
       />
       <TextInput
         placeholder="Confirm Password"
+        placeholderTextColor="#f0f0f0"
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         secureTextEntry
@@ -125,7 +121,7 @@ function LoginScreen({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/login', {
+      const response = await axios.post('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/login', {
         username,
         password
       });
@@ -145,15 +141,17 @@ function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container2}>
+    <View style={styles.container1}>
       <TextInput
         placeholder="Username"
+        placeholderTextColor="#f0f0f0"
         value={username}
         onChangeText={setUsername}
         style={styles.input}
       />
       <TextInput
         placeholder="Password"
+        placeholderTextColor="#f0f0f0"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -192,6 +190,7 @@ const styles = StyleSheet.create({
   },
   container2: {
     flex: 1,
+    backgroundColor: 'black',
     justifyContent: 'center',
     paddingHorizontal: 20
   },
@@ -214,15 +213,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   input: {
-    width: '100%',
-    height: 40,
     borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 10,
-    paddingHorizontal: 10
-  },
-  input: {
-    borderColor: 'gray',
+    color: 'white',
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
@@ -230,31 +222,28 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   loginButton: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#37FD12',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center'
   },
   loginButtonText: {
-    color: 'white',
-    fontSize: 20
-  },
-  input: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    fontSize: 18
+    color: 'black',
+    textAlign: 'center'
   },
   registerButton: {
-    backgroundColor: '#27ae60',
+    backgroundColor: '#37FD12',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center'
   },
   registerButtonText: {
+    color: 'black',
+    textAlign: 'center'
+  },
+  linkText  : {
     color: 'white',
-    fontSize: 20
+    fontSize: 16,
+    marginTop: 20
   }
 });

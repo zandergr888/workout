@@ -19,7 +19,7 @@ export default function WorkoutList({ selectedDate }) {
     const [newSetWeight, setNewSetWeight] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/workouts')
+        axios.get('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts')
             .then(res => {
                 // workouts retrieved successfully
                 setWorkouts(res.data);
@@ -41,7 +41,7 @@ export default function WorkoutList({ selectedDate }) {
 
 
     const deleteWorkout = (id) => {
-        axios.delete(`http://localhost:8080/api/workouts/${id}`)
+        axios.delete(`http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts/${id}`)
             .then(res => {
                 // workout was deleted successfully
                 console.log(res.data);
@@ -58,10 +58,11 @@ export default function WorkoutList({ selectedDate }) {
             name: newWorkoutName,
             bestSet: newWorkoutBestSet,
             date: selectedDate,
-            sets: newWorkoutSets
+            sets: newWorkoutSets,
+            usersID: '1',
         };
 
-        axios.post('http://localhost:8080/api/workouts', newWorkout)
+        axios.post('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts', newWorkout)
             .then(res => {
                 // workout was created successfully
                 console.log(res.data);

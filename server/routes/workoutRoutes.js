@@ -8,7 +8,8 @@ const workoutSchema = new mongoose.Schema({
     name: String,
     bestSet: String,
     date: String,
-    sets: Array
+    sets: Array,
+    usersID: String,
 }, {
     timestamps: true
 });
