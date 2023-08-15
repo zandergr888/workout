@@ -11,7 +11,7 @@ The main technologies used in this project are:
 - **React.js**: A JavaScript library for building user interfaces, specifically single page applications.
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine. It is used here to build the server-side of the application.
 
-Other key technologies include React Native for the mobile front-end, Mongoose for object modeling with MongoDB, and Axios for making HTTP requests.
+Other key technologies include React Native for the mobile front-end, Mongoose for object modeling with MongoDB, Axios for making HTTP requests, AWS ec2 for hosting the backend.
 
 ## Project Overview
 
@@ -19,9 +19,17 @@ The Full Stack Workout Tracker allows users to track their workout routines. You
 
 ### Sample Photos/Videos
 
-![](https://github.com/zandergr888/workout/blob/main/demo.png)
+![](https://github.com/zandergr888/workout/blob/main/demo2.png)
+![](https://github.com/zandergr888/workout/blob/main/demo3.png)
+![](https://github.com/zandergr888/workout/blob/main/demo4.png)
+![](https://github.com/zandergr888/workout/blob/main/demo1.png)
 
-This is a sample picture of the UI. You can navigate between days and click on each workout that you added. Each workout is then added to the backend server, which is also displayed on the above picture. Each workout is then displayed since the front end and back end interact with each other. 
+
+This is a sample picture of the UI. You can navigate between days and click on each workout that you added. Each workout is then added to the backend server, which is also displayed on the above picture. Each workout is then displayed since the front end and back end interact with each other. Furthermore, you can login and only display your own workouts. 
+
+Published page HERE for demo - https://expo.dev/@alexanderhoang/WorkoutApp3?serviceType=classic&distribution=expo-go
+
+
 
 ## Getting Started
 
@@ -65,3 +73,6 @@ Contributions, issues, and feature requests are welcome!
 Your Name - alex.hoang@utexas.edu
 
 Project Link: https://github.com/zandergr888/workout.git
+
+Page Link: https://expo.dev/@alexanderhoang/WorkoutApp3?serviceType=classic&distribution=expo-go
+
