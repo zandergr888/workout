@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, Pressable, StyleSheet, Modal, Button, Dimensions, TouchableWithoutFeedback, TextInput } from 'react-native';
 import initialWorkouts from '../data/workouts';
 import { EvilIcons } from '@expo/vector-icons'; 
+import UserContext from './UserContext';
+
 
 import axios from 'axios';
 
 export default function WorkoutList({ selectedDate }) {
+    const { loggedInUser } = useContext(UserContext);
 
     selectedDate = selectedDate.toDateString().substring(4)
 
@@ -17,18 +20,19 @@ export default function WorkoutList({ selectedDate }) {
     const [newWorkoutSets, setNewWorkoutSets] = useState([]);
     const [newSetReps, setNewSetReps] = useState('');
     const [newSetWeight, setNewSetWeight] = useState('');
+    const [usersID, setUsersID] = useState('');
 
     useEffect(() => {
-        axios.get('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts')
-            .then(res => {
-                // workouts retrieved successfully
-                setWorkouts(res.data);
-            })
-            .catch(err => {
-                // something went wrong
-                console.error(err);
-            });
-    }, []);
+        if (loggedInUser) {
+            axios.get(`http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts?date=${selectedDate}&usersID=${loggedInUser}`)
+                .then(res => {
+                    setWorkouts(res.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
+    }, [loggedInUser, selectedDate]);
 
     const addSetToWorkout = () => {
         setNewWorkoutSets([
@@ -59,13 +63,14 @@ export default function WorkoutList({ selectedDate }) {
             bestSet: newWorkoutBestSet,
             date: selectedDate,
             sets: newWorkoutSets,
-            usersID: '1',
+            usersID: loggedInUser,
         };
+
 
         axios.post('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts', newWorkout)
             .then(res => {
                 // workout was created successfully
-                console.log(res.data);
+                
                 setWorkouts([...workouts, res.data]);
             })
             .catch(err => {
@@ -78,8 +83,9 @@ export default function WorkoutList({ selectedDate }) {
         setNewWorkoutSets([]);
         setAddWorkoutVisible(false);
     };
+    console.log(loggedInUser);
     const workoutsForDate = workouts.filter(
-        (workout) => workout.date === selectedDate
+        (workout) => workout.date === selectedDate && workout.usersID === loggedInUser
     );
     return (
         <View>

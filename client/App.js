@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { TextInput, SafeAreaView, StyleSheet, Text, View, Pressable, ScrollView, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
@@ -6,6 +7,7 @@ import WorkoutList from './components/WorkoutList';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
+import UserContext from './components/UserContext';
 import parseErrorStack from 'react-native/Libraries/Core/Devtools/parseErrorStack';
 
 const Stack = createStackNavigator();
@@ -119,6 +121,9 @@ function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const { setLoggedInUser } = useContext(UserContext);
+
+
   const handleLogin = async () => {
     try {
       const response = await axios.post('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/login', {
@@ -127,6 +132,7 @@ function LoginScreen({ navigation }) {
       });
 
       if (response.status === 200) {
+        setLoggedInUser(username);
         navigation.navigate('Main');
       } else {
         alert('Invalid username or password');
@@ -170,14 +176,19 @@ function LoginScreen({ navigation }) {
 
 
 export default function App() {
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserContext.Provider>
   );
 }
 
@@ -241,7 +252,7 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'center'
   },
-  linkText  : {
+  linkText: {
     color: 'white',
     fontSize: 16,
     marginTop: 20

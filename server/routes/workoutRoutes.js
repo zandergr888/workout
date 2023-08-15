@@ -36,6 +36,7 @@ router.get('/workouts/:id', (req, res) => {
 // create a workout
 router.post('/workouts', (req, res) => {
     const newWorkout = new Workout(req.body);
+    console.log("req body" + req.body);
     newWorkout.save()
     .then(workout => res.json(workout))
     .catch(err => res.status(500).json('Error: ' + err));
