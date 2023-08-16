@@ -40,12 +40,14 @@ Published page HERE for demo - https://expo.dev/@alexanderhoang/WorkoutApp3?serv
 2. Install all dependencies:
     ```
     cd workout
-    npm install
+    cd client
+    yarn install
     ```
 
-3. Start the server:
+3. navigate to the backend
     ```
-    npm start
+    cd ..
+    cd server
     ```
 
 4. Connect to the MongoDB database:
