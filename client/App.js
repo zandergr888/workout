@@ -72,7 +72,7 @@ function MainScreen({ navigation }) {
 
         {/* add status ring */}
 
-        <RingProgress progress={(totalSets + 1) / 30} />
+        <RingProgress progress={(totalSets + 0.1) / 30} />
 
         <View style={styles.valuesContainer}>
           <Value label="Sets " value={totalSets.toString()} />
