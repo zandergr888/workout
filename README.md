@@ -59,11 +59,9 @@ Published page HERE for demo - https://expo.dev/@alexanderhoang/WorkoutApp3?serv
   
 - **Authentication & Security**: 
   - **Bcrypt**: Safeguards user passwords with advanced hashing techniques.
-  - **JWT**: Ensures secure user sessions and token-based authentication.
   
 - **Deployment & DevOps**:
   - **AWS EC2**: Hosts the application, ensuring high uptime and availability.
-  - **Docker & Kubernetes**: Streamlines deployment and scales the application seamlessly.
   
 ## Installation & Setup
 
