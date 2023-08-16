@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
 import UserContext from './components/UserContext';
+import RingProgress from './components/RingProgress';
 import parseErrorStack from 'react-native/Libraries/Core/Devtools/parseErrorStack';
 
 const Stack = createStackNavigator();
@@ -47,8 +48,12 @@ function MainScreen({ navigation }) {
             color="#C3FF53"
           />
         </View>
+
+        {/* add status ring */}
+        <RingProgress progress={0.2} />
+        
         <WorkoutList selectedDate={date} />
-        <StatusBar style="auto" />
+    
       </ScrollView>
     </SafeAreaView>
   );
