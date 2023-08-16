@@ -1,21 +1,28 @@
-# Full Stack Workout Tracker (MERN Stack)
+# MERN Stack Fitness Tracker
 
-Welcome to the Full Stack Workout Tracker project! This application is built using the MERN stack, a popular full-stack JavaScript solution that helps in building fast, robust, and maintainable production web applications.
+A sophisticated full-stack web application crafted to aid users in monitoring and efficiently tracking their workout routines. Powered by MongoDB, Express.js, React, and Node.js (MERN Stack).
 
-## Tech Stack
+## Table of Contents
 
-The main technologies used in this project are:
+- [Overview](#overview)
+- [Features](#features)
+- [Sample Photos](#sample-photosvideos)
+- [Technology Stack](#technology-stack)
+- [Installation & Setup](#installation-&-setup)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
 
-- **MongoDB**: A document-oriented NoSQL database used for high volume data storage.
-- **Express.js**: A back-end web application framework for Node.js designed for building web applications and APIs.
-- **React.js**: A JavaScript library for building user interfaces, specifically single page applications.
-- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine. It is used here to build the server-side of the application.
 
-Other key technologies include React Native for the mobile front-end, Mongoose for object modeling with MongoDB, Axios for making HTTP requests, AWS ec2 for hosting the backend.
+## Overview
 
-## Project Overview
+The Fitness Tracker offers an immersive user interface, enabling users to seamlessly log and visualize their workouts. Combined with a user-oriented calendar navigation and intricate performance analytics, it's tailored to propel users towards their fitness aspirations.
 
-The Full Stack Workout Tracker allows users to track their workout routines. You can add workouts with custom sets, reps, and weights, and the application will store and display all your workouts for each date.
+## Features
+
+- **User Authentication**: Robust user authentication with bcrypt password hashing and JWT session management.
+- **Workout Logging**: An intuitive platform for users to detail their workouts – from type to sets, reps, and duration.
+- **Progress Visualization**: Witness fitness progress through a compelling ring indicator.
+- **Date Navigation**: Effortlessly navigate through dates to reminisce or plan workouts.
 
 ### Sample Photos/Videos
 
@@ -30,50 +37,70 @@ Published page HERE for demo - https://expo.dev/@alexanderhoang/WorkoutApp3?serv
 
 
 
-## Getting Started
+## Technology Stack
 
-1. Clone this repository:
+- **Backend**:
+  - **Express.js**: A lightweight, fast, and flexible framework that powers the backend.
+  - **Node.js**: Ensures efficient and scalable server-side operations.
+  - **RESTful API Design**: Provides seamless communication between front-end and back-end.
+  - **Error Handling & Data Validation**: Ensures data integrity and robust application behavior.
+  - **Mongoose ODM**: Simplifies interaction with MongoDB by modeling application data.
+  
+- **Frontend**: 
+  - **React**: Powers the dynamic UI components, offering users an engaging experience.
+  - **React Native Components**: Ensures the application is mobile-responsive and consistent across platforms.
+  - **Context API**: Manages global state throughout the app.
+  - **Axios**: Facilitates API requests, bridging the frontend and backend seamlessly.
+  - **Custom Hooks**: Enhances component logic and reusability.
+  
+- **Database**: 
+  - **MongoDB**: A NoSQL database that offers flexibility and scalability.
+  - **Atlas**: MongoDB's cloud database service ensures data is easily accessible and secure.
+  
+- **Authentication & Security**: 
+  - **Bcrypt**: Safeguards user passwords with advanced hashing techniques.
+  - **JWT**: Ensures secure user sessions and token-based authentication.
+  
+- **Deployment & DevOps**:
+  - **AWS EC2**: Hosts the application, ensuring high uptime and availability.
+  - **Docker & Kubernetes**: Streamlines deployment and scales the application seamlessly.
+  
+## Installation & Setup
+
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/fitness-tracker.git
+    cd fitness-tracker
     ```
-    git clone https://github.com/zandergr888/workout.git
+
+2. **Install Dependencies**:
+    ```bash
+    npm install
+    cd client && npm install
     ```
 
-2. Install all dependencies:
-    ```
-    cd workout
-    cd client
-    yarn install
-    ```
-
-3. navigate to the backend
-    ```
-    cd ..
-    cd server
+3. **Setup Environment Variables**: Draft a `.env` at the root with the required environment variables.
+    ```env
+    DATABASE_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/fitness-tracker?retryWrites=true&w=majority
+    JWT_SECRET=YOUR_SECRET_KEY
     ```
 
-4. Connect to the MongoDB database:
-    You'll need to create a `.env` file in the root of your project with your MongoDB URL:
-    ```
-    MONGODB_URL=mongodb://your-mongodb-url
-    ```
-
-5. Run the front-end React Native app:
-    Navigate to the front-end directory and start the app:
-    ```
-    cd client
-    npm start
+4. **Execute Locally**:
+    ```bash
+    npm run dev
     ```
 
-**NOTE**: Make sure MongoDB, Node.js, and React Native are properly installed and configured on your machine before running the application.
+## Usage
 
-## Contribution
+- **New User Registration**: Head to the 'Register' page, provide your credentials and get started!
+- **Log a Workout**: Once authenticated, choose your date, spill your workout details, and save.
+- **View Progress**: The dashboard showcases a vivid ring indicator reflecting your performance against set goals.
 
-Contributions, issues, and feature requests are welcome!
+## API Endpoints
 
-## Contact
+- `/api/register`: Registers a new user with a POST request.
+- `/api/login`: Authenticates an existing user with a POST request.
+- `/api/workouts`: Retrieves user workouts with a GET and logs a new workout with POST.
 
-Your Name - alex.hoang@utexas.edu
 
-Project Link: https://github.com/zandergr888/workout.git
-
-Page Link: https://expo.dev/@alexanderhoang/WorkoutApp3?serviceType=classic&distribution=expo-go
 
