@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { TextInput, SafeAreaView, StyleSheet, Text, View, Pressable, ScrollView, Button } from 'react-native';
@@ -9,18 +9,39 @@ import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
 import UserContext from './components/UserContext';
 import RingProgress from './components/RingProgress';
+import Value from './components/Value';
 import parseErrorStack from 'react-native/Libraries/Core/Devtools/parseErrorStack';
 
 const Stack = createStackNavigator();
 
 function MainScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
+  const [totalSets, setTotalSets] = useState(0); // New state for total sets
+  const { loggedInUser } = useContext(UserContext);
 
   const changeDate = (numDays) => {
     let newDate = new Date(date);
     newDate.setDate(date.getDate() + numDays);
     setDate(newDate);
   };
+
+  useEffect(() => {
+    axios.get('http://ec2-34-238-42-150.compute-1.amazonaws.com:8080/api/workouts')
+      .then(response => {
+
+        const todayWorkoutsForUser = response.data.filter(workout =>
+          workout.date === date.toDateString().substring(4) && workout.usersID === loggedInUser
+        );
+
+
+        const setsForToday = todayWorkoutsForUser.reduce((acc, workout) => acc + workout.sets.length, 0);
+        setTotalSets(setsForToday);
+      })
+      .catch(error => {
+        console.error("Error fetching workouts:", error);
+      });
+  }, [date, loggedInUser]);
+
 
   return (
     <SafeAreaView style={styles.container1}
@@ -50,10 +71,15 @@ function MainScreen({ navigation }) {
         </View>
 
         {/* add status ring */}
-        <RingProgress progress={0.2} />
-        
+
+        <RingProgress progress={(totalSets + 1) / 30} />
+
+        <View style={styles.valuesContainer}>
+          <Value label="Sets " value={totalSets.toString()} />
+          <Value label="Goal Sets " value={30} />
+        </View>
         <WorkoutList selectedDate={date} />
-    
+        <StatusBar style="auto" />
       </ScrollView>
     </SafeAreaView>
   );
@@ -261,5 +287,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     marginTop: 20
-  }
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    padding: 12,
+  },
+  valuesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',  // This will ensure they are spaced out evenly
+    paddingHorizontal: 10,           // Some padding to ensure they are not right at the edge
+  },
+
 });

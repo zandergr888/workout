@@ -83,7 +83,7 @@ export default function WorkoutList({ selectedDate }) {
         setNewWorkoutSets([]);
         setAddWorkoutVisible(false);
     };
-    console.log(loggedInUser);
+    
     const workoutsForDate = workouts.filter(
         (workout) => workout.date === selectedDate && workout.usersID === loggedInUser
     );
