@@ -1,6 +1,6 @@
-# MERN Stack Fitness Tracker
+# Full Stack Fitness Tracker "FitTrack"
 
-A sophisticated full-stack web application crafted to aid users in monitoring and efficiently tracking their workout routines. Powered by MongoDB, Express.js, React, and Node.js (MERN Stack).
+An amazing application that utilizes the MERN Stack. It utilizes MongoDB, Express.js, React Native, and Node.js. This application was inspired by my love for the gym/bodybuilding. Going to the gym is definitely one of my joys of every day and one of the main reasons I get up in the morning. It provides rigitiy to my day as well as a mental/physical way to improve. That is why I created this application
 
 ## Table of Contents
 
@@ -15,13 +15,14 @@ A sophisticated full-stack web application crafted to aid users in monitoring an
 
 ## Overview
 
-The Fitness Tracker offers an immersive user interface, enabling users to seamlessly log and visualize their workouts. Combined with a user-oriented calendar navigation and intricate performance analytics, it's tailored to propel users towards their fitness aspirations.
+I call this app "FitTrack" because that's exactly what it does. It keeps track of your fitness in a way that combines the best of every fitness application. The app has a very immersive user interface, one that I created. It allows for users to log and visualize their progress/workouts. More about the UI: it has a RingProgess component that I thought was really cool, which was inspired by Apple's Fitness application. This project took me a while because I didn't have much backend experience and I feel like I have much more experience now. 
+
 
 ## Features
 
-- **User Authentication**: Robust user authentication with bcrypt password hashing and JWT session management.
-- **Workout Logging**: An intuitive platform for users to detail their workouts – from type to sets, reps, and duration.
-- **Progress Visualization**: Witness fitness progress through a compelling ring indicator.
+- **User Authentication**: Robust user authentication with bcrypt password hashing!
+- **Workout Logging**: An intuitive platform for users to detail their workouts – from type to sets, reps.
+- **Progress Visualization**: Witness fitness history! You can see your progress through a ring, inspired by apple
 - **Date Navigation**: Effortlessly navigate through dates to reminisce or plan workouts.
 
 ### Sample Photos/Videos
@@ -31,7 +32,7 @@ The Fitness Tracker offers an immersive user interface, enabling users to seamle
 ![](https://github.com/zandergr888/workout/blob/main/demogif2.gif)
 
 
-This is a sample picture of the UI. You can navigate between days and click on each workout that you added. Each workout is then added to the backend server, which is also displayed on the above picture. Each workout is then displayed since the front end and back end interact with each other. Furthermore, you can login and only display your own workouts. 
+This is a sample picture of the UI. You can navigate between days and click on each workout that you added. Each workout is then added to the backend server, which is also displayed on the above picture. Each workout is then displayed since the front end and back end interact with each other via axios. Furthermore, you can login and only display your own workouts. 
 
 Published page HERE for demo - https://expo.dev/@alexanderhoang/WorkoutApp3?serviceType=classic&distribution=expo-go
 
