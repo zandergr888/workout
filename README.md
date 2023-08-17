@@ -15,7 +15,7 @@ An amazing application that utilizes the MERN Stack. It utilizes MongoDB, Expres
 
 ## Overview
 
-I call this app "FitTrack" because that's exactly what it does. It keeps track of your fitness in a way that combines the best of every fitness application. The app has a very immersive user interface, one that I created. It allows for users to log and visualize their progress/workouts. More about the UI: it has a RingProgess component that I thought was really cool, which was inspired by Apple's Fitness application. This project took me a while because I didn't have much backend experience and I feel like I have much more experience now. 
+I call this app "FitTrack" because that's exactly what it does. It keeps track of your fitness in a way that combines the best of every fitness application. The app has a very immersive user interface, one that I created. It allows for users to log and visualize their progress/workouts. More about the UI: it has a RingProgess component that I thought was really cool, which was inspired by Apple's Fitness application. This project took me a while because I didn't have much backend experience but through the process of learning to create this application, I have learned so much about back end programming.
 
 
 ## Features
